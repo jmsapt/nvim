@@ -26,3 +26,5 @@ vim.g.mapleader = ' '
 -- nvim-tree bindings
 map('n', '<C-e>', ':NvimTreeToggle<CR>')
 
+-- toggle term bindings
+map('n', '<C-j>', ':ToggleTerm<CR>')

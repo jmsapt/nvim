@@ -1,8 +1,3 @@
--- Custom Config 
-require("keymaps")
-
--- Standard Config
-
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -19,16 +14,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
-
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
   'nvim-tree/nvim-tree.lua',
+  'akinsho/toggleterm.nvim',
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -499,4 +487,11 @@ cmp.setup {
 }
 
 require("nvim-tree").setup()
--- The line beneath this is called `modeline`. See `:help modeline`
+require("toggleterm").setup({
+  size = 18,
+  open_mapping = [[<c-j>]],
+  shade_terminals = true,
+  close_on_exit = true,
+  direction = "horizontal"
+})
+require("keymaps")
