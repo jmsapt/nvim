@@ -493,8 +493,8 @@ cmp.setup {
 -- Additional Plugins
 require("nvim-tree").setup()
 require("toggleterm").setup({
-  size = 18,
-  open_mapping = [[<c-j>]],
+  size = 20,
+  open_mapping = [[<c-\>]],
   shade_terminals = true,
   close_on_exit = true,
   direction = "horizontal"
