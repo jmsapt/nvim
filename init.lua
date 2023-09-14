@@ -1,6 +1,9 @@
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
+
+vim.g.mapleader = ' '
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -17,6 +20,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   'nvim-tree/nvim-tree.lua',
   'akinsho/toggleterm.nvim',
+  'simrat39/rust-tools.nvim',
+  'williamboman/mason-lspconfig.nvim',
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -53,8 +58,7 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-
+      'hrsh7th/cmp-nvim-lsp', 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
@@ -486,6 +490,7 @@ cmp.setup {
   },
 }
 
+-- Additional Plugins
 require("nvim-tree").setup()
 require("toggleterm").setup({
   size = 18,
@@ -495,3 +500,6 @@ require("toggleterm").setup({
   direction = "horizontal"
 })
 require("keymaps")
+
+-- languages
+require("rust-tools").setup()
