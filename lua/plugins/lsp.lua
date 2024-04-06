@@ -9,9 +9,6 @@ return {
 
     config = function()
         local lspconfig = require("lspconfig")
-        -- local mason = require("mason")
-
-        -- mason.setup()
 
         -- Clangd Setup
         lspconfig.clangd.setup({
