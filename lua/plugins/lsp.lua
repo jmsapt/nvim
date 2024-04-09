@@ -6,7 +6,7 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
     },
-
+    lazy = true,
     config = function()
         local lspconfig = require("lspconfig")
 
@@ -19,6 +19,7 @@ return {
                 "--header-insertion=iwyu",
                 "--completion-style=detailed",
                 "--function-arg-placeholders",
+                -- "-style=file:~/.config/nvim/lua/plugins/.clang-format",
                 "--fallback-style=llvm",
             },
             filetypes = {
@@ -41,7 +42,7 @@ return {
                     local view = vim.fn.winsaveview()
                     vim.lsp.util.apply_text_edits(result, bufnr)
                     vim.fn.winrestview(view)
-                end
+                end,
             },
         })
 
@@ -49,7 +50,6 @@ return {
         lspconfig.rust_analyzer.setup({
             flags = flags,
             capabilities = capabilities,
-            on_attach = on_attach,
             on_attach = function(client, bufnr)
                 vim.lsp.inlay_hint.enable(bufnr)
             end,

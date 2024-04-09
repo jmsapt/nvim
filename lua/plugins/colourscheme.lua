@@ -1,17 +1,13 @@
-if true then
-    return {}
-end
-
--- Optionally configure colorscheme
 return {
-    -- add gruvbox
-    { "ellisonleao/gruvbox.nvim" },
 
-    -- Configure LazyVim to load gruvbox
-    {
-        "LazyVim/LazyVim",
-        opts = {
-            colorscheme = "gruvbox",
-        },
-    },
+    "catppuccin/nvim",
+    lazy = false,
+    name = "custom",
+    -- you can do it like this with a config function
+    config = function()
+        require("catppuccin").setup({
+            flavour = "macchiato",
+            transparent_background = true,
+        })
+    end,
 }
