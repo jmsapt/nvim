@@ -42,7 +42,8 @@ return {
                 injected = { options = { ignore_errors = true } },
                 ["clang-format"] = {
                     prepend_args = {
-                        "-style=file:/home/james/.config/nvim/lua/plugins/.clang-format",
+                        -- Default Style File
+                        (("-style=file:${HOME}/.config/nvim/lua/plugins/.clang-format"):gsub("${([%w_]+)}", os.getenv)),
                     },
                 },
 
