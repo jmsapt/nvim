@@ -50,8 +50,8 @@ return {
         lspconfig.rust_analyzer.setup({
             flags = flags,
             capabilities = capabilities,
-            on_attach = function(client, bufnr)
-                vim.lsp.inlay_hint.enable(bufnr)
+            on_attach = function(client)
+                vim.lsp.inlay_hint.enable()
             end,
             settings = {
                 ["rust-analyzer"] = {

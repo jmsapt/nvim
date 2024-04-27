@@ -24,3 +24,6 @@ if vim.fn.has("wsl") == 1 then
         }
     end
 end
+
+-- Enable inline hints (i.e. rust-analyzer)
+vim.lsp.inlay_hint.enable()
