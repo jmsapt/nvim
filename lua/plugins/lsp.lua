@@ -45,14 +45,14 @@ return {
                 end,
             },
         })
-
-        -- Rust Analyzer Setup
+        --[[ Rust Analyzer Setup
+        local on_attach = function(client)
+            require("completion").on_attach(client)
+        end
         lspconfig.rust_analyzer.setup({
             flags = flags,
             capabilities = capabilities,
-            on_attach = function(client)
-                vim.lsp.inlay_hint.enable()
-            end,
+            on_attach = on_attach,
             settings = {
                 ["rust-analyzer"] = {
                     imports = {
@@ -72,5 +72,6 @@ return {
                 },
             },
         })
+        --]]
     end,
 }
