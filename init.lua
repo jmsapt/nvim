@@ -1,5 +1,17 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+-- Lavy Nvim plugin manager
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup(plugins, opts)
 
 -- Config clipboard for wsl
 if vim.fn.has("wsl") == 1 then
@@ -26,4 +38,4 @@ if vim.fn.has("wsl") == 1 then
 end
 
 -- Enable inline hints (i.e. rust-analyzer)
-vim.lsp.inlay_hint.enable()
+-- vim.lsp.inlay_hint.enable()
