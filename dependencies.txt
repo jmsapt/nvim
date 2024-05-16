@@ -1,0 +1,5 @@
+stylua
+python-black
+shfmt
+prettier
+ripgrep
