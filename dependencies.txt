@@ -1,5 +1,7 @@
 stylua
 python-black
+pyright
+clang
 shfmt
 prettier
 ripgrep
