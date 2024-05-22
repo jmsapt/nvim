@@ -10,6 +10,7 @@ return {
       json = { "prettier" },
       bash = { "shfmt" },
       rust = { "rustfmt" },
+      c = { "clang-format" },
     },
   },
 }

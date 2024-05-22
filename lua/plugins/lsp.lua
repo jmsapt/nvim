@@ -1,69 +1,93 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" },
-      })
-    end,
-  },
+  "williamboman/mason-lspconfig.nvim",
+  "williamboman/mason.nvim",
+  "hrsh7th/cmp-nvim-lsp",
   {
     "neovim/nvim-lspconfig",
-    -- "hrsh7th/nvim-cmp-lsp",
-    lazy = true,
+    -- depenencies = {
+    --   { "antosha417/nvim-lsp-file-operations", config = true },
+    -- },
+    lazy = false,
     config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup({ ensure_installed = { "lua_ls" } })
+
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
 
-      -- clangd (C/C++)
-      -- Clangd Setup
-      lspconfig.clangd.setup({
-        cmd = {
-          "clangd",
-          "--background-index",
-          "--clang-tidy",
-          "--header-insertion=iwyu",
-          "--completion-style=detailed",
-          "--function-arg-placeholders",
-          -- "-style=file:~/.config/nvim/lua/plugins/.clang-format",
-          "--fallback-style=llvm",
-        },
-        filetypes = {
-          "c",
-          "cpp",
-        },
-        init_options = {
-          usePlaceholders = true,
-          completeUnimported = true,
-          clangdFileStatus = true,
-        },
-        capabilities = {
-          offsetEncoding = { "utf-16" },
-        },
-        handlers = {
-          ["textDocument/formatting"] = function(err, _, result, _, bufnr)
-            if err ~= nil or result == nil then
-              return
-            end
-            local view = vim.fn.winsaveview()
-            vim.lsp.util.apply_text_edits(result, bufnr)
-            vim.fn.winrestview(view)
-          end,
-        },
-      })
+      -- set bindings on attach
+      local on_attach = function(client, bufnr)
+        local wk = require("which-key")
+        wk.register({
+          ["<leader>r"] = { vim.lsp.buf.rename, "Rename symbol" },
+          ["K"] = { vim.lsp.buf.hover, "Show documentation" },
+          ["<leader>d"] = { vim.diagnostic.open_float, "Show diagnostics" },
+          ["<leader>."] = { vim.lsp.buf.code_action, "Code actions" },
+        })
+      end
 
-      -- Rust analyzer
-      lspconfig.rust_analyzer.setup({})
-
-      -- Lua_ls
-      lspconfig.lua_ls.setup({
-        -- allow global `vim`
-        settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+      -- Place all lsp setups inside this
+      require("mason-lspconfig").setup_handlers({
+        function(server_name) -- default handler (optional)
+          lspconfig[server_name].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end,
+        -- Rust
+        ["rust_analyzer"] = function()
+          lspconfig.rust_analyzer.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end,
+        -- Lua
+        ["lua_ls"] = function()
+          lspconfig.lua_ls.setup({
+            -- allow global `vim`
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+          })
+        end,
+        -- C / C++
+        -- ["clangd"] = function()
+        --   lspconfig.clangd.setup({
+        --     capabilities = capabilities,
+        --     cmd = {
+        --       "clangd",
+        --       "--background-index",
+        --       "--clang-tidy",
+        --       "--header-insertion=iwyu",
+        --       "--completion-style=detailed",
+        --       "--function-arg-placeholders",
+        --       -- "-style=file:~/.config/nvim/lua/plugins/.clang-format",
+        --       "--fallback-style=llvm",
+        --     },
+        --     filetypes = {
+        --       "c",
+        --       "cpp",
+        --     },
+        --     init_options = {
+        --       usePlaceholders = true,
+        --       completeUnimported = true,
+        --       clangdFileStatus = true,
+        --     },
+        --     -- capabilities = {
+        --     --   offsetEncoding = { "utf-16" },
+        --     -- },
+        --     handlers = {
+        --       ["textDocument/formatting"] = function(err, _, result, _, bufnr)
+        --         if err ~= nil or result == nil then
+        --           return
+        --         end
+        --         local view = vim.fn.winsaveview()
+        --         vim.lsp.util.apply_text_edits(result, bufnr)
+        --         vim.fn.winrestview(view)
+        --       end,
+        --     },
+        --   })
+        -- end,
       })
     end,
 
