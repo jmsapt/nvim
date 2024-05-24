@@ -22,7 +22,7 @@ return {
           ["<leader>r"] = { vim.lsp.buf.rename, "Rename symbol" },
           ["K"] = { vim.lsp.buf.hover, "Show documentation" },
           ["<leader>d"] = { vim.diagnostic.open_float, "Show diagnostics" },
-          ["<leader>."] = { vim.lsp.buf.code_action, "Code actions" },
+          ["<m-cr>"] = { vim.lsp.buf.code_action, "Code actions" },
         })
       end
 

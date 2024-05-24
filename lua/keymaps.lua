@@ -42,16 +42,22 @@ wk.register({
     name = "+toggle",
     l = { ":wa<cr>:qa<cr>", "Toggle LSP" },
   },
-  -- Rename
-  -- ["<leader>rn"] = { vim.lsp.buf.rename(), "Rename symbol" },
+
   -- Neotree
-  ["<leader>e"] = { "<cmd><cr>", "Neotree" },
+  ["<leader>e"] = { "<cmd>Neotree toggle right<cr>", "Neotree" },
   ["<leader><space>"] = { "<cmd>noh<cr>", "Clear search highlights" },
   -- Insert newlines
   ["<leader><cr>"] = { "i<cr><esc>", "Insert a newline at current position" },
   -- Buffer-tabs
   ["<c-tab>"] = { "<cmd>bn<cr>", "Next buffer-tab" },
   ["<c-s-tab>"] = { "<cmd>bp<cr>", "Previous buffer-tab" },
-  -- Toggle Term
-  ["<c-j>"] = { "<cmd>ToggleTerm<cr>", "Previous buffer-tab", mode = { 'i', 'n', 'v', 't' } },
+})
+
+-- Windows
+wk.register({
+  ["<m-right>"] = { "<cmd>wincmd l<cr>", "Focus right window" },
+  ["<m-left>"] = { "<cmd>wincmd h<cr>", "Focus left window" },
+  ["<m-down>"] = { "<cmd>wincmd j<cr>", "Focus bottom window" },
+  ["<m-up>"] = { "<cmd>wincmd k<cr>", "Focus top window" },
+  mode = { "n", "v", "t" },
 })
