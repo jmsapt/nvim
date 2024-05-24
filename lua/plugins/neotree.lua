@@ -58,5 +58,8 @@ return {
         expander_highlight = "NeoTreeExpander",
       },
     },
+    window = {
+      position = "right",
+    },
   },
 }
