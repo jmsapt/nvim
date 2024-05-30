@@ -6,7 +6,9 @@ return {
     "hrsh7th/cmp-path",
     "L3MON4d3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets",
+    -- "rafamadriz/friendly-snippets",
+    -- latex snippets
+    -- "kdheepak/cmp-latex-symbols",
   },
   config = function()
     local cmp = require("cmp")
@@ -43,6 +45,12 @@ return {
         { name = "luasnip" },
         -- { name = "buffer" },
         { name = "path" },
+        -- {
+        --   name = "latex_symbols",
+        --   option = {
+        --     strategy = 0, -- mixed
+        --   },
+        -- },
       }),
     })
   end,

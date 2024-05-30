@@ -11,6 +11,25 @@ return {
       bash = { "shfmt" },
       rust = { "rustfmt" },
       c = { "clang-format" },
+      tex = { "latexindent" },
+      bib = { "biblatex-tidy" },
+    },
+    formatters = {
+      injected = { options = { ignore_errors = true } },
+      ["clang-format"] = {
+        prepend_args = {
+          -- Default Style File
+          (("-style=file:${HOME}/.config/nvim/clang-format"):gsub("${([%w_]+)}", os.getenv)),
+        },
+      },
+      ["latexindent"] = {
+        command = "latexindent",
+        prepend_args = {
+        }
+      },
+      ["biblatex-tidy"] = {
+        command = "bibtex-tidy",
+      }
     },
   },
 }

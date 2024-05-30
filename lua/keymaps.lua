@@ -1,5 +1,4 @@
 local wk = require("which-key")
-local gitsigns = require("gitsigns")
 
 -- Prefixes
 -- c => current buffer
@@ -60,4 +59,16 @@ wk.register({
   ["<m-down>"] = { "<cmd>wincmd j<cr>", "Focus bottom window" },
   ["<m-up>"] = { "<cmd>wincmd k<cr>", "Focus top window" },
   mode = { "n", "v", "t" },
+})
+
+-- Telescope
+wk.register({
+  name = "+telescope",
+  ["<leader>f"] = {
+    ["f"] = { "<cmd>Telescope find_files<cr>", "Find files" },
+    ["g"] = { "<cmd>Telescope live_grep<cr>", "Grep" },
+    ["b"] = { "<cmd>Telescope buffers<cr>", "Find buffer" },
+    ["h"] = { "<cmd>Telescope help_tags<cr>", "Help tags" },
+  },
+  mode = { "n" },
 })

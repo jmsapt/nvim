@@ -1,10 +1,18 @@
 #include <stdio.h>
 
-int main() {
-  int x = 13;
-  double foobar = 1.0;
-  double z = foobar;
-  double y = foobar;
+int maint(void) {
+    printf("hello world");
 
-  printf("hello world");
+    if (1) {
+        printf("foo");
+    }
+
+    int x;
+    { 
+        char b = 'x';
+        x = 10;
+    }
+    int y = x + 12;
+
+    return 0;
 }
