@@ -4,10 +4,8 @@ return {
   "hrsh7th/cmp-nvim-lsp",
   {
     "neovim/nvim-lspconfig",
-    -- depenencies = {
-    --   { "antosha417/nvim-lsp-file-operations", config = true },
-    -- },
-    lazy = false,
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({ ensure_installed = { "lua_ls" } })

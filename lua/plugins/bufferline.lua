@@ -4,7 +4,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     "famiu/bufdelete.nvim",
   },
-  lazy = false,
+  -- lazy = true,
 
   config = function()
     require("bufferline").setup({

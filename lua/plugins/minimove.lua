@@ -2,7 +2,8 @@
 -- config here is default (included for concisness)
 return {
   "echasnovski/mini.move",
-  lazy = false,
+  lazy = true,
+  event = {"BufReadPre", "BufNewFile"},
   options = {
     -- Automatically reindent selection during linewise vertical move
     reindent_linewise = true,
