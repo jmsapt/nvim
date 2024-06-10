@@ -1,8 +1,4 @@
 local wk = require("which-key")
-
--- Prefixes
--- c => current buffer
--- g => global
 -- w => window
 -- q => quit
 
@@ -72,3 +68,6 @@ wk.register({
   },
   mode = { "n" },
 })
+
+-- Vimtex Documentation
+
