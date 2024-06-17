@@ -11,6 +11,7 @@ return {
       bash = { "shfmt" },
       rust = { "rustfmt" },
       c = { "clang-format" },
+      cpp = { "clang-format" },
       tex = { "latexindent" },
       bib = { "biblatex-tidy" },
     },
