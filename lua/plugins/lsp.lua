@@ -48,7 +48,12 @@ return {
             settings = { Lua = { diagnostics = { globals = { "vim" } } } },
           })
         end,
-        -- C / C++
+        -- Instead of setting clangd for C/C++, just use bear
+        -- to create the compile_commands.json file in the root
+        --
+        -- Otherwise clangd will get confused between C/C++
+        --
+        -- -- C / C++
         -- ["clangd"] = function()
         --   lspconfig.clangd.setup({
         --     capabilities = capabilities,
@@ -65,24 +70,6 @@ return {
         --     filetypes = {
         --       "c",
         --       "cpp",
-        --     },
-        --     init_options = {
-        --       usePlaceholders = true,
-        --       completeUnimported = true,
-        --       clangdFileStatus = true,
-        --     },
-        --     -- capabilities = {
-        --     --   offsetEncoding = { "utf-16" },
-        --     -- },
-        --     handlers = {
-        --       ["textDocument/formatting"] = function(err, _, result, _, bufnr)
-        --         if err ~= nil or result == nil then
-        --           return
-        --         end
-        --         local view = vim.fn.winsaveview()
-        --         vim.lsp.util.apply_text_edits(result, bufnr)
-        --         vim.fn.winrestview(view)
-        --       end,
         --     },
         --   })
         -- end,
