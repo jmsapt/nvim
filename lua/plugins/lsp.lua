@@ -1,18 +1,13 @@
 return {
-  "williamboman/mason-lspconfig.nvim",
-  "williamboman/mason.nvim",
   "hrsh7th/cmp-nvim-lsp",
   {
     "neovim/nvim-lspconfig",
     lazy = true,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup({ ensure_installed = { "lua_ls" } })
-
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
-
+      
       -- set bindings on attach
       local on_attach = function(client, bufnr)
         local wk = require("which-key")
@@ -23,57 +18,42 @@ return {
           ["<m-cr>"] = { vim.lsp.buf.code_action, "Code actions" },
         })
       end
-
-      -- Place all lsp setups inside this
-      require("mason-lspconfig").setup_handlers({
-        function(server_name) -- default handler (optional)
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-          })
-        end,
-        -- Rust
-        ["rust_analyzer"] = function()
-          lspconfig.rust_analyzer.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-          })
-        end,
-        -- Lua
-        ["lua_ls"] = function()
-          lspconfig.lua_ls.setup({
-            -- allow global `vim`
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = { Lua = { diagnostics = { globals = { "vim" } } } },
-          })
-        end,
-        -- Instead of setting clangd for C/C++, just use bear
-        -- to create the compile_commands.json file in the root
-        --
-        -- Otherwise clangd will get confused between C/C++
-        --
-        -- -- C / C++
-        -- ["clangd"] = function()
-        --   lspconfig.clangd.setup({
-        --     capabilities = capabilities,
-        --     cmd = {
-        --       "clangd",
-        --       "--background-index",
-        --       "--clang-tidy",
-        --       "--header-insertion=iwyu",
-        --       "--completion-style=detailed",
-        --       "--function-arg-placeholders",
-        --       -- "-style=file:~/.config/nvim/lua/plugins/.clang-format",
-        --       "--fallback-style=llvm",
-        --     },
-        --     filetypes = {
-        --       "c",
-        --       "cpp",
-        --     },
-        --   })
-        -- end,
+      
+      -- Rust
+      lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
       })
+      
+      -- Lua (allow global `vim`)
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        },
+      })
+      
+      -- C / C++ (using bear to generate compile_commands.json)
+      -- You can install `clangd` via your package manager
+      -- Uncomment if needed
+      -- lspconfig.clangd.setup({
+      --   capabilities = capabilities,
+      --   cmd = {
+      --     "clangd",
+      --     "--background-index",
+      --     "--clang-tidy",
+      --     "--header-insertion=iwyu",
+      --     "--completion-style=detailed",
+      --     "--function-arg-placeholders",
+      --     "--fallback-style=llvm",
+      --   },
+      --   filetypes = { "c", "cpp" },
+      -- })
     end,
 
     opts = {
