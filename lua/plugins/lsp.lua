@@ -41,19 +41,19 @@ return {
       -- C / C++ (using bear to generate compile_commands.json)
       -- You can install `clangd` via your package manager
       -- Uncomment if needed
-      -- lspconfig.clangd.setup({
-      --   capabilities = capabilities,
-      --   cmd = {
-      --     "clangd",
-      --     "--background-index",
-      --     "--clang-tidy",
-      --     "--header-insertion=iwyu",
-      --     "--completion-style=detailed",
-      --     "--function-arg-placeholders",
-      --     "--fallback-style=llvm",
-      --   },
-      --   filetypes = { "c", "cpp" },
-      -- })
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
+        filetypes = { "c", "cpp" },
+      })
     end,
 
     opts = {
