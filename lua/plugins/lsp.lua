@@ -7,24 +7,30 @@ return {
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
-      
+
       -- set bindings on attach
       local on_attach = function(client, bufnr)
         local wk = require("which-key")
-        wk.register({
-          ["<leader>r"] = { vim.lsp.buf.rename, "Rename symbol" },
-          ["K"] = { vim.lsp.buf.hover, "Show documentation" },
-          ["<leader>d"] = { vim.diagnostic.open_float, "Show diagnostics" },
-          ["<m-cr>"] = { vim.lsp.buf.code_action, "Code actions" },
+        wk.add({
+          { "<leader>r", vim.lsp.buf.rename,        desc = "Rename symbol" },
+          { "K",         vim.lsp.buf.hover,         desc = "Show documentation" },
+          { "<leader>d", vim.diagnostic.open_float, desc = "Show diagnostics" },
+          { "<m-cr>",    vim.lsp.buf.code_action,   desc = "Code actions" },
         })
       end
-      
+
       -- Rust
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
-      
+
+      -- Nix
+      lspconfig.nixd.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
       -- Lua (allow global `vim`)
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
@@ -37,7 +43,7 @@ return {
           },
         },
       })
-      
+
       -- C / C++ (using bear to generate compile_commands.json)
       -- You can install `clangd` via your package manager
       -- Uncomment if needed
