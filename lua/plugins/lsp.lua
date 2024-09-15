@@ -12,10 +12,11 @@ return {
       local on_attach = function(client, bufnr)
         local wk = require("which-key")
         wk.add({
-          { "<leader>r", vim.lsp.buf.rename,        desc = "Rename symbol" },
-          { "K",         vim.lsp.buf.hover,         desc = "Show documentation" },
-          { "<leader>d", vim.diagnostic.open_float, desc = "Show diagnostics" },
-          { "<m-cr>",    vim.lsp.buf.code_action,   desc = "Code actions" },
+          { "<leader>r", vim.lsp.buf.rename(),        desc = "Rename symbol" },
+          { "<leader>d", vim.diagnostic.open_float(), desc = "Show diagnostics" },
+          { "<leader>a",    vim.lsp.buf.code_action(),   desc = "Code actions" },
+          { "<m-cr>",    vim.lsp.buf.code_action(),   desc = "Code actions" },
+          { "K",         vim.lsp.buf.hover(),         desc = "Show documentation" },
         })
       end
 
