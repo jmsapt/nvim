@@ -50,6 +50,7 @@ return {
       -- Uncomment if needed
       lspconfig.clangd.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
         cmd = {
           "clangd",
           "--background-index",
