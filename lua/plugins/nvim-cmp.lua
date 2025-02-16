@@ -20,8 +20,8 @@ return {
         completeopt = "menu,menuone,noinsert",
       },
       mapping = cmp.mapping.preset.insert({
+        -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
         ["<Tab>"] = cmp.mapping(function(fallback)
-          -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
           if cmp.visible() then
             local entry = cmp.get_selected_entry()
             if not entry then
@@ -32,7 +32,7 @@ return {
           else
             fallback()
           end
-        end, { "i", "s", "c" }),
+        end, { "i", "s" }),
       }),
       snippet = {
         expand = function(args)

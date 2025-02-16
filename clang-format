@@ -4,3 +4,9 @@ IndentWidth: 4
 BreakBeforeBraces: Custom
 BraceWrapping:
   BeforeElse: true
+
+
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
