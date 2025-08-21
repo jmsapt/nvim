@@ -28,3 +28,4 @@ require("lazy").setup({ import = "plugins" }, {
 require("commands")
 require("options")
 require("keymaps")
+require("spellcheck")
