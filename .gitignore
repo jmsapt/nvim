@@ -1,1 +1,9 @@
-/nix/store/ibfcy4vh8c811wjp1a9hqfy86fjmqqq7-home-manager-files/.config/nvim/.gitignore
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+lazy-lock.json
