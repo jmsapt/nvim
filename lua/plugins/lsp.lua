@@ -17,6 +17,12 @@ return {
           { "<leader>a", function() vim.lsp.buf.code_action() end,   desc = "Code actions" },
           { "<m-cr>",    function() vim.lsp.buf.code_action() end,   desc = "Code actions" },
           { "K",         function() vim.lsp.buf.hover() end,         desc = "Show documentation" },
+          {
+            "<leader>h",
+            function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+            desc =
+            "Toggle type hinting"
+          },
         })
       end
 
@@ -49,6 +55,7 @@ return {
         on_attach = on_attach,
         cmd = {
           "clangd",
+          "--inlay-hints",
           "--background-index",
           "--clang-tidy",
           "--header-insertion=iwyu",
