@@ -65,6 +65,12 @@ return {
         filetypes = { "c", "cpp" },
       })
 
+      -- Bazel / Starlark
+      lspconfig.starpls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
       -- Rust
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
@@ -99,4 +105,9 @@ return {
       },
     },
   },
+  -- Bazel:
+  -- GoToBazelDefinition()        " Jump to definition
+  -- GoToBazelTarget()            " Jumps to the BUILD file of current buffer
+  -- GetLabel()                   " Returns bazel label of target in build file
+  { 'alexander-born/bazel.nvim', dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' } },
 }

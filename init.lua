@@ -23,6 +23,11 @@ require("lazy").setup({ import = "plugins" }, {
   -- },
 })
 
+-- theme
+-- catppuccin -> catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+-- kanagawa -> kanagawa-wave, kanagawa-dragon, kanagawa-lotus
+
+vim.cmd.colorscheme("catppuccin")
 
 -- Source files
 require("commands")

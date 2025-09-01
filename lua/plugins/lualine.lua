@@ -4,7 +4,7 @@ return {
   lazy = true,
   init = function()
     local lualine = require("lualine").setup({
-      options = { theme = "catppuccin" },
+      options = { theme = "tokyonight" },
       disabled_filetype = { "neo-tree" },
     })
   end,

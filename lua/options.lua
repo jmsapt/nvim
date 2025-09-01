@@ -30,7 +30,6 @@ opt.splitbelow = true
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
-vim.cmd("colorscheme catppuccin") -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
 -- status line & sign column
 opt.laststatus = 3

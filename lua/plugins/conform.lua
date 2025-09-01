@@ -14,6 +14,8 @@ return {
       cpp = { "clang-format" },
       tex = { "latexindent" },
       bib = { "biblatex-tidy" },
+      bzl = { "buildifier" },
+      bazel = { "buildifier" },
     },
     formatters = {
       injected = { options = { ignore_errors = true } },
