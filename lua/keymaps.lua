@@ -10,7 +10,7 @@ wk.add({
   { "<leader>c", group = "current buffer" },
   { "<leader>cf", "<cmd>Format<cr>", desc = "Format current buffer" },
   { "<leader>e", "<cmd>Neotree toggle right<cr>", desc = "Neotree" },
-  { "<leader>d", "\"_d", desc = "Yank-less delete" },
+  -- { "<leader>d", "\"_d", desc = "Yank-less delete" },
   { "<leader>g", group = "global" },
 
   { "<leader>q", group = "quit" },

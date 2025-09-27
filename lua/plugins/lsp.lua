@@ -6,10 +6,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local lspconfig = require("lspconfig")
 
       -- set bindings on attach
-      local on_attach = function(client, bufnr)
+      local on_attach = function(bufnr)
         local wk = require("which-key")
         wk.add({
           { "<leader>r", function() vim.lsp.buf.rename() end,        desc = "Rename symbol" },
@@ -27,17 +26,19 @@ return {
       end
 
 
-      -- Default setup servers
+      -- -- Default setup servers
       local lsp_servers = { "bashls", "nixd" }
       for _, svr in ipairs(lsp_servers) do
-        lspconfig[svr].setup({
+        vim.lsp.config[svr] = {
           capabilities = capabilities,
           on_attach = on_attach,
-        })
+        }
+        vim.lsp.enable(svr);
       end
 
+
       -- Lua (allow global `vim`)
-      lspconfig.lua_ls.setup({
+      vim.lsp.config["lua_ls"] = {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -47,37 +48,42 @@ return {
             },
           },
         },
-      })
+      }
+      vim.lsp.enable("lua_ls");
 
       -- C/C++
-      lspconfig.clangd.setup({
+      vim.lsp.config["clangd"] = {
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = {
           "clangd",
-          "--inlay-hints",
           "--background-index",
           "--clang-tidy",
           "--header-insertion=iwyu",
           "--enable-config",
           "--fallback-style=llvm",
+          "--completion-style=basic",
         },
         filetypes = { "c", "cpp" },
-      })
+      }
+      vim.lsp.enable("clangd");
 
       -- Bazel / Starlark
-      lspconfig.starpls.setup({
+      vim.lsp.config["starpls"] = {
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+        cmd = { "starpls" },
+      }
+      vim.lsp.enable("starpls");
 
       -- Rust
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config["rust_analyzer"] = {
         capabilities = capabilities,
-        on_attach = function(client, bufnr)
+        on_attach = function(bufnr)
           vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end
-      })
+      }
+      vim.lsp.enable("rust_analyzer");
     end,
 
 
@@ -104,6 +110,15 @@ return {
         timeout_ms = nil,
       },
     },
+  },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+      vim.diagnostic.config({ virtual_text = false })   -- Disable default virtual text
+    end
   },
   -- Bazel:
   -- GoToBazelDefinition()        " Jump to definition
