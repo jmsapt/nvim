@@ -16,6 +16,8 @@ wk.add({
   { "<leader>q", group = "quit" },
   { "<leader>qQ", "<cmd>qa!<cr>", desc = "Force quit all buffers" },
   { "<leader>qq", "<cmd>wa<cr><cmd>qa<cr>", desc = "Quit all buffers (write first)" },
+  { "<leader>yp", "<cmd>let @* = expand(\"%d:p\")<cr>", desc = "Yank current path" },
+  { "gb", "<cmd>BazelGoTo<cr>", desc = "Goto BUILD.bazel" },
 })
 
 -- Windows
@@ -39,13 +41,6 @@ wk.add({
 })
 
 -- Telescope
-wk.add({
-  { "<leader>f", group = "telescope" },
-  { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffer" },
-  { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-  { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
-  { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-})
 
 -- Vimtex Documentation
 

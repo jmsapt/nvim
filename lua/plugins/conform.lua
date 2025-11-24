@@ -22,7 +22,7 @@ return {
       ["clang-format"] = {
         prepend_args = {
           -- Default Style File
-          (("-style=file:${HOME}/.config/nvim/clang-format"):gsub("${([%w_]+)}", os.getenv)),
+          -- (("-style=file:${HOME}/.config/nvim/clang-format"):gsub("${([%w_]+)}", os.getenv)),
         },
       },
       ["latexindent"] = {

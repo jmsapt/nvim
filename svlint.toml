@@ -1,0 +1,10 @@
+[option]
+# exclude_paths = ["ip/.*"]
+# prefix_label = "lab_"
+
+[textrules]
+style_indent = true
+
+[syntaxrules]
+module_nonansi_forbidden = true
+keyword_forbidden_wire_reg = true

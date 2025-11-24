@@ -27,10 +27,13 @@ require("lazy").setup({ import = "plugins" }, {
 -- catppuccin -> catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 -- kanagawa -> kanagawa-wave, kanagawa-dragon, kanagawa-lotus
 
-vim.cmd.colorscheme("catppuccin")
-
 -- Source files
 require("commands")
 require("options")
 require("keymaps")
 require("spellcheck")
+
+-- vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("kanagawa")
+local colors = require("kanagawa.colors").setup().palette
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.crystalBlue, bg = colors.sumiInk0, bold = true })

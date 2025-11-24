@@ -11,11 +11,15 @@ return {
       local on_attach = function(bufnr)
         local wk = require("which-key")
         wk.add({
-          { "<leader>r", function() vim.lsp.buf.rename() end,        desc = "Rename symbol" },
-          { "<leader>d", function() vim.diagnostic.open_float() end, desc = "Show diagnostics" },
-          { "<leader>a", function() vim.lsp.buf.code_action() end,   desc = "Code actions" },
-          { "<m-cr>",    function() vim.lsp.buf.code_action() end,   desc = "Code actions" },
-          { "K",         function() vim.lsp.buf.hover() end,         desc = "Show documentation" },
+          { "<leader>r", function() vim.lsp.buf.rename() end,          desc = "Rename symbol" },
+          { "<leader>d", function() vim.diagnostic.open_float() end,   desc = "Show diagnostics" },
+          { "<leader>a", function() vim.lsp.buf.code_action() end,     desc = "Code actions" },
+          { "<m-cr>",    function() vim.lsp.buf.code_action() end,     desc = "Code actions" },
+          { "gd",        function() vim.lsp.buf.declaration() end,     desc = "Goto definition" },
+          { "gD",        function() vim.lsp.buf.definition() end,      desc = "Goto declaration" },
+          { "gy",        function() vim.lsp.buf.type_definition() end, desc = "Goto type definition" },
+          { "gr",        "<cmd>Telescope lsp_references<cr>",          desc = "Symbol references" },
+          { "K",         function() vim.lsp.buf.hover() end,           desc = "Show documentation" },
           {
             "<leader>h",
             function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
@@ -27,7 +31,7 @@ return {
 
 
       -- -- Default setup servers
-      local lsp_servers = { "bashls", "nixd" }
+      local lsp_servers = { "bashls", "nixd", "pyright" }
       for _, svr in ipairs(lsp_servers) do
         vim.lsp.config[svr] = {
           capabilities = capabilities,
@@ -36,6 +40,17 @@ return {
         vim.lsp.enable(svr);
       end
 
+      vim.lsp.config["verible"] = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = {
+          "verible-verilog-ls",
+          "--file_list_path=/home/data/fpga/verible.filelist",
+          "--rules_config_search",
+          "--flagfile=/home/data/fpga/.verible.flags"
+        }
+      }
+      vim.lsp.enable("verible");
 
       -- Lua (allow global `vim`)
       vim.lsp.config["lua_ls"] = {
@@ -62,7 +77,7 @@ return {
           "--header-insertion=iwyu",
           "--enable-config",
           "--fallback-style=llvm",
-          "--completion-style=basic",
+          -- "--completion-style=basic",
         },
         filetypes = { "c", "cpp" },
       }
