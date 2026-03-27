@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 
--- Lavy Nvim plugin manager
+-- lavy nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -27,7 +27,7 @@ require("lazy").setup({ import = "plugins" }, {
 -- catppuccin -> catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 -- kanagawa -> kanagawa-wave, kanagawa-dragon, kanagawa-lotus
 
--- Source files
+-- source files
 require("commands")
 require("options")
 require("keymaps")
@@ -36,4 +36,10 @@ require("spellcheck")
 -- vim.cmd.colorscheme("catppuccin")
 vim.cmd.colorscheme("kanagawa")
 local colors = require("kanagawa.colors").setup().palette
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.crystalBlue, bg = colors.sumiInk0, bold = true })
+
+-- -- bright orange separators
+-- vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.surimiOrange, bg = colors.sumiInk0, bold = true })
+-- vim.api.nvim_set_hl(0, "VertSplit",    { fg = colors.surimiOrange, bg = colors.sumiInk0, bold = true })
+-- -- lualine's main line (keep your lualine config)
+-- vim.api.nvim_set_hl(0, "StatusLine",   { bg = colors.surimiOrange, fg = colors.sumiInk0, bold = true })
+-- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = colors.surimiOrange, fg = colors.sumiInk4 })

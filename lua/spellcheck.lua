@@ -5,7 +5,7 @@ local wk = require("which-key")
 vim.opt_local.spelllang = "en_au"
 
 wk.add({
-  { "<leader>s", function ()
+  { "<leader>cs", function ()
       local state = not vim.opt_local.spell:get()
       vim.opt_local.spell = state
       vim.notify((state and "  " or "  ")

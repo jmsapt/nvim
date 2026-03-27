@@ -7,17 +7,28 @@ wk.add({
   { "<c-tab>", "<cmd>bn<cr>", desc = "Next buffer-tab" },
   { "<leader><cr>", "i<cr><esc>", desc = "Insert a newline at current position" },
   { "<leader><space>", "<cmd>noh<cr>", desc = "Clear search highlights" },
+
   { "<leader>c", group = "current buffer" },
   { "<leader>cf", "<cmd>Format<cr>", desc = "Format current buffer" },
-  { "<leader>e", "<cmd>Neotree toggle right<cr>", desc = "Neotree" },
+
+  { "<leader>q", "<cmd>close<cr>", desc = "Close current split" },
+
+  { "<leader>e", "<cmd>Neotree toggle right<cr>", desc = "Neotree" }, -- TODO floating neotree
   -- { "<leader>d", "\"_d", desc = "Yank-less delete" },
   { "<leader>g", group = "global" },
 
-  { "<leader>q", group = "quit" },
-  { "<leader>qQ", "<cmd>qa!<cr>", desc = "Force quit all buffers" },
-  { "<leader>qq", "<cmd>wa<cr><cmd>qa<cr>", desc = "Quit all buffers (write first)" },
   { "<leader>yp", "<cmd>let @* = expand(\"%d:p\")<cr>", desc = "Yank current path" },
-  { "gb", "<cmd>BazelGoTo<cr>", desc = "Goto BUILD.bazel" },
+  { "<leader>yl", "<cmd>let @* = expand('%:p') .. ':' .. line('.')<cr>", desc = "Yank current path and line" },
+
+  { "gb", "<cmd>GoToBazel<cr>",  desc = "Goto BUILD.bazel" },
+  { "gh", "<cmd>GoToHeader<cr>", desc = "Goto Header" },
+  { "gs", "<cmd>GoToSource<cr>", desc = "Goto Source" },
+
+  { "<leader>v", group = "Vsplit" },
+  { "<leader>vv", function() vim.cmd.vsplit() end,  desc = "Vsplit BUILD.bazel" },
+  { "<leader>vb", function() vim.cmd.vsplit(); vim.cmd.GoToBazel() end,  desc = "Vsplit Current Buffer" },
+  { "<leader>vh", "<cmd>vsplit | GoToHeader<cr>", desc = "Vsplit Header" },
+  { "<leader>vs", "<cmd>vsplit | GoToSource<cr>", desc = "Vsplit Source" },
 })
 
 -- Windows

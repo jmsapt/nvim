@@ -5,6 +5,11 @@ return {
     lazy = true,
   },
   {
+    "sainnhe/everforest",
+    name = "everforest",
+    lazy = true,
+  },
+  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,

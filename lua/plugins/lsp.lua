@@ -20,6 +20,12 @@ return {
           { "gy",        function() vim.lsp.buf.type_definition() end, desc = "Goto type definition" },
           { "gr",        "<cmd>Telescope lsp_references<cr>",          desc = "Symbol references" },
           { "K",         function() vim.lsp.buf.hover() end,           desc = "Show documentation" },
+
+          -- goto diagnostic
+          { "]d",        function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })end, desc = "Goto next ERROR" },
+          { "[d",        function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })end, desc = "Goto prev ERROR" },
+          { "]D",        function() vim.diagnostic.goto_next() end, desc = "Goto next diagnostic" },
+          { "[D",        function() vim.diagnostic.goto_next() end, desc = "Goto prev diagnostic" },
           {
             "<leader>h",
             function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
